@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Sección de estadísticas -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/holo_purple"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estadísticas de Mascotas"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/estadisticasTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:background="@android:color/transparent"
+                android:padding="8dp"/>
+        </LinearLayout>
+
+        <!-- Sección de filtros avanzados -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/holo_orange_light"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filtros Avanzados"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"/>
+
+            <Spinner
+                android:id="@+id/criterioFiltroSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:id="@+id/contenedorValorFiltro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Contenedor para el input específico del filtro -->
+                <EditText
+                    android:id="@+id/valorFiltroEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Valor del filtro"
+                    android:padding="12dp"
+                    android:background="@android:color/white"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone"/>
+
+                <Spinner
+                    android:id="@+id/valorFiltroSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/aplicarFiltroButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aplicar Filtro"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/holo_orange_dark"/>
+
+        </LinearLayout>
+
+        <!-- Sección de búsqueda -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/darker_gray"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Búsqueda de Mascotas"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Buscar por nombre o raza"
+                android:padding="12dp"
+                android:background="@android:color/white"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/buscarMascotaButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buscar Mascota"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/holo_blue_dark"/>
+        </LinearLayout>
+
+        <!-- Sección de acciones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Acciones"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/crearMascotaButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Crear Nueva Mascota"
+                android:backgroundTint="@android:color/holo_green_dark"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/agregarMascotasButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Agregar Mascotas de Ejemplo"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/ordenarMascotasButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ordenar Mascotas por Edad"/>
+        </LinearLayout>
+
+        <!-- Sección de resultados -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resultados"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/resultadoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No hay resultados para mostrar"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:background="@android:color/darker_gray"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

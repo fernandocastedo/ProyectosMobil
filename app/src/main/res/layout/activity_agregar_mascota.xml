@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar Nueva Mascota"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Selector de tipo de mascota -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo de Mascota:"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/tipoMascotaSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Campos comunes -->
+        <EditText
+            android:id="@+id/nombreEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/edadEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Edad"
+            android:inputType="number"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/razaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Raza"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/pesoEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Peso (kg)"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/estadoSaludSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Campos específicos para Perro y Gato -->
+        <LinearLayout
+            android:id="@+id/perroGatoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nivel de Energía (1-10):"
+                android:layout_marginBottom="4dp"/>
+
+            <SeekBar
+                android:id="@+id/nivelEnergiaSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="10"
+                android:progress="5"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sociabilidad (1-10):"
+                android:layout_marginBottom="4dp"/>
+
+            <SeekBar
+                android:id="@+id/sociabilidadSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="10"
+                android:progress="5"
+                android:layout_marginBottom="8dp"/>
+        </LinearLayout>
+
+        <!-- Campos específicos para Ave -->
+        <LinearLayout
+            android:id="@+id/aveLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/tipoAveEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tipo de Ave"
+                android:layout_marginBottom="8dp"/>
+
+            <Switch
+                android:id="@+id/puedeVolarSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="¿Puede volar?"
+                android:checked="true"
+                android:layout_marginBottom="8dp"/>
+        </LinearLayout>
+
+        <!-- Campos específicos para Ave Exótica -->
+        <LinearLayout
+            android:id="@+id/aveExoticaLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/tipoAveExoticaEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tipo de Ave Exótica"
+                android:layout_marginBottom="8dp"/>
+
+            <Switch
+                android:id="@+id/puedeVolarExoticaSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="¿Puede volar?"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/estadoConservacionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Estado de Conservación"
+                android:layout_marginBottom="8dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/guardarButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar Mascota"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</ScrollView> 
