@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".DatabaseInfoActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cantidad Registros"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/txtUsuarioCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario: "
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/txtTransaccionMonedaCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TransaccionMoneda: "
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/txtMonedaCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Moneda: "
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/edtUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Insertar ID-Usuario"
+        android:inputType="number"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/btnSearchUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar Usuario"/>
+
+    <TextView
+        android:id="@+id/txtUserInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/btnDeleteUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Borrar"/>
+
+</LinearLayout> 

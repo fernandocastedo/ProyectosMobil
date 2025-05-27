@@ -28,4 +28,7 @@ public interface MonedaDao {
 
     @Query("SELECT * FROM moneda WHERE monedaID = :id LIMIT 1")
     LiveData<Moneda> getMonedaById(int id);
+
+    @Query("SELECT COUNT(*) FROM moneda")
+    int countMonedas();
 }

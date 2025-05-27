@@ -31,4 +31,7 @@ public interface TransaccionMonedaDao {
 
     @Query("SELECT * FROM transaccionmoneda WHERE usuarioID = :usuarioID ORDER BY fecha DESC")
     LiveData<List<TransaccionMoneda>> getTransaccionesPorUsuario(int usuarioID);
+
+    @Query("SELECT COUNT(*) FROM transaccionmoneda")
+    int countTransaccionesMoneda();
 }

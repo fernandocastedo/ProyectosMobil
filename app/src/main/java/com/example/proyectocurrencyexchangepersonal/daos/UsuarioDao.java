@@ -34,5 +34,10 @@ public interface UsuarioDao {
     @Query("SELECT * FROM usuario ORDER BY nombre ASC")
     List<Usuario> getAllUsuariosSync();  // Para uso interno sin LiveData
 
+    @Query("SELECT COUNT(*) FROM usuario")
+    int countUsuarios();
+
+    @Query("SELECT * FROM usuario WHERE usuarioID = :id LIMIT 1")
+    Usuario getUsuarioByIdSync(int id);
 
 }
