@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.proyectocurrencyexchangepersonal.viewmodels.UsuarioViewModel;
 
 public class SplashActivity extends AppCompatActivity {
@@ -18,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
 
         UsuarioViewModel usuarioViewModel = new ViewModelProvider(this).get(UsuarioViewModel.class);
         usuarioViewModel.inicializarUsuariosSiVacio();
+
 
         // Después de 2 segundos, iniciar LoginActivity
         new Handler().postDelayed(() -> {

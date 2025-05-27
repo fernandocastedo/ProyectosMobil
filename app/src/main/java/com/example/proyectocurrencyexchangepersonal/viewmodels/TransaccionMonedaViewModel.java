@@ -43,7 +43,4 @@ public class TransaccionMonedaViewModel extends AndroidViewModel {
     public LiveData<List<TransaccionMoneda>> getTransaccionesPorUsuario(int usuarioID) {
         return repository.getTransaccionesPorUsuario(usuarioID);
     }
-    public void inicializarUsuariosSiVacio() {
-        repository.inicializarUsuariosSiVacio();
-    }
 }

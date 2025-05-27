@@ -32,6 +32,7 @@ public interface UsuarioDao {
     @Query("SELECT * FROM usuario WHERE nombre = :nombre LIMIT 1")
     Usuario getUsuarioByNombre(String nombre);  // No LiveData para uso interno (ej: login)
     @Query("SELECT * FROM usuario ORDER BY nombre ASC")
-    List<Usuario> getAllUsuariosSync();
+    List<Usuario> getAllUsuariosSync();  // Para uso interno sin LiveData
+
 
 }

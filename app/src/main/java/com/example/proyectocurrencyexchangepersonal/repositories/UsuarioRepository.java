@@ -27,6 +27,16 @@ public class UsuarioRepository {
     public LiveData<List<Usuario>> getAllUsuarios() {
         return allUsuarios;
     }
+    public void inicializarUsuariosSiVacio() {
+        executorService.execute(() -> {
+            List<Usuario> usuarios = usuarioDao.getAllUsuariosSync();
+            if (usuarios == null || usuarios.isEmpty()) {
+                usuarioDao.insert(new Usuario("fernando", "fernando@mail.com", "123", "Bolivia", "admin"));
+                usuarioDao.insert(new Usuario("pedro", "pedro@mail.com", "abc", "Bolivia", "usuario"));
+                usuarioDao.insert(new Usuario("maria", "maria@mail.com", "1234", "Argentina", "usuario"));
+            }
+        });
+    }
 
     public void insert(Usuario usuario) {
         executorService.execute(() -> usuarioDao.insert(usuario));
@@ -38,17 +48,6 @@ public class UsuarioRepository {
 
     public void delete(Usuario usuario) {
         executorService.execute(() -> usuarioDao.delete(usuario));
-    }
-    public void inicializarUsuariosSiVacio() {
-        executorService.execute(() -> {
-            List<Usuario> usuarios = usuarioDao.getAllUsuariosSync(); // Método nuevo para consulta sin LiveData
-
-            if (usuarios == null || usuarios.isEmpty()) {
-                usuarioDao.insert(new Usuario("fernando", "fernando@mail.com", "123", "Bolivia", "admin"));
-                usuarioDao.insert(new Usuario("pedro", "pedro@mail.com", "abc", "Bolivia", "usuario"));
-                usuarioDao.insert(new Usuario("maria", "maria@mail.com", "1234", "Argentina", "usuario"));
-            }
-        });
     }
 
     public Usuario getUsuarioByNombre(String nombre) {

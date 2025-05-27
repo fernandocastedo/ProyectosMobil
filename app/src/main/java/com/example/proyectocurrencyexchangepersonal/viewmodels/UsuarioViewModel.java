@@ -37,4 +37,8 @@ public class UsuarioViewModel extends AndroidViewModel {
     public void delete(Usuario usuario) {
         repository.delete(usuario);
     }
+    public void inicializarUsuariosSiVacio() {
+        repository.inicializarUsuariosSiVacio();
+    }
+
 }
