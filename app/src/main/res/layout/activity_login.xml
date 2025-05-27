@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loginLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_monedas"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/fercastedo_logo"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CURRENCY EXCHANGE PERSONAL"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/imgLogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerUsuarios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitulo"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/spinner_background"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/etContrasena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerUsuarios"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Ingresar Contraseña"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#DDDDDD" />
+
+
+    <Button
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/etContrasena"
+        android:layout_marginTop="25dp"
+        android:text="INICIAR SESIÓN"
+        android:backgroundTint="#000000"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"/>
+
+</RelativeLayout>
