@@ -17,56 +17,63 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.proyectocurrencyexchangepersonal.Adapters.TransaccionMonedaAdapter;
 import com.example.proyectocurrencyexchangepersonal.models.TransaccionMoneda;
 import com.example.proyectocurrencyexchangepersonal.viewmodels.TransaccionMonedaViewModel;
+import com.example.proyectocurrencyexchangepersonal.daos.MonedaDao;
+import com.example.proyectocurrencyexchangepersonal.database.AppDatabase;
+import com.example.proyectocurrencyexchangepersonal.models.Moneda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class ConversionesActivity extends AppCompatActivity {
 
     private Spinner spinnerMonedaOrigen, spinnerMonedaDestino;
-    private EditText etMonto, etFecha;
+    private EditText etMonto;
     private Button btnConvertir;
     private TextView tvResultados;
     private RecyclerView recyclerViewResultados;
     private TransaccionMonedaViewModel transaccionMonedaViewModel;
     private TransaccionMonedaAdapter adapter;
-    private List<String> listaMonedas;
-
-    private void inicializarMonedas() {
-        listaMonedas = new ArrayList<>();
-        listaMonedas.add("USD - Dólar");
-        listaMonedas.add("BOB - Boliviano");
-        listaMonedas.add("EUR - Euro");
-        listaMonedas.add("GBP - Libra esterlina");
-        listaMonedas.add("JPY - Yen japonés");
-        // Agrega más monedas según sea necesario
-    }
+    private List<Moneda> listaMonedas;
+    private int currentUserId;
+    private MonedaDao monedaDao;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversiones);
 
-        // Inicializamos los elementos
+        // Get user ID from Intent
+        currentUserId = getIntent().getIntExtra("USER_ID", -1);
+        if (currentUserId == -1) {
+            Toast.makeText(this, "User ID not received", Toast.LENGTH_SHORT).show();
+            finish(); // Close activity if user ID is not available
+            return;
+        }
+
+        // Initialize elements
         spinnerMonedaOrigen = findViewById(R.id.spinnerMonedaOrigen);
         spinnerMonedaDestino = findViewById(R.id.spinnerMonedaDestino);
         etMonto = findViewById(R.id.etMonto);
-        etFecha = findViewById(R.id.etFecha);
+        // etFecha = findViewById(R.id.etFecha); // Fecha se obtiene automáticamente
         btnConvertir = findViewById(R.id.btnConvertir);
         tvResultados = findViewById(R.id.tvResultados);
         recyclerViewResultados = findViewById(R.id.recyclerViewResultados);
 
-        inicializarMonedas();
+        // Database and DAO
+        AppDatabase db = AppDatabase.getInstance(this);
+        monedaDao = db.monedaDao();
 
-        // Configuramos el Spinner para Moneda Origen
-        ArrayAdapter<String> adapterMonedaOrigen = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listaMonedas);
-        adapterMonedaOrigen.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMonedaOrigen.setAdapter(adapterMonedaOrigen);
+        // Executor Service for background tasks
+        executorService = Executors.newSingleThreadExecutor();
 
-        // Configuramos el Spinner para Moneda Destino
-        ArrayAdapter<String> adapterMonedaDestino = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listaMonedas);
-        adapterMonedaDestino.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMonedaDestino.setAdapter(adapterMonedaDestino);
+        // Load currencies and populate spinners
+        loadCurrencies();
 
         // Configurar RecyclerView
         recyclerViewResultados.setLayoutManager(new LinearLayoutManager(this));
@@ -78,33 +85,102 @@ public class ConversionesActivity extends AppCompatActivity {
 
         // Convertir botón
         btnConvertir.setOnClickListener(v -> {
-            String monto = etMonto.getText().toString();
-            String fecha = etFecha.getText().toString();
-
-            if (monto.isEmpty() || fecha.isEmpty()) {
-                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
-            } else {
-                // Lógica para calcular conversión (ejemplo simplificado)
-                // Aquí deberíamos consultar el tipo de cambio y realizar el cálculo
-                double montoConvertido = Double.parseDouble(monto) * 1.2; // ejemplo de tasa de cambio
-                TransaccionMoneda transaccion = new TransaccionMoneda(
-                        1, // usuarioID (esto debería ser dinámico)
-                        1, // monedaOrigenID (esto debería ser dinámico)
-                        2, // monedaDestinoID (esto debería ser dinámico)
-                        Double.parseDouble(monto),
-                        montoConvertido,
-                        System.currentTimeMillis()
-                );
-                transaccionMonedaViewModel.insert(transaccion);
-                Toast.makeText(this, "Conversión realizada", Toast.LENGTH_SHORT).show();
-            }
+            convertCurrency();
         });
 
-        // Observar transacciones
-        transaccionMonedaViewModel.getAllTransacciones().observe(this, transacciones -> {
-            if (transacciones != null) {
-                adapter.setTransacciones(transacciones);
+        // Observe transacciones
+        transaccionMonedaViewModel.getAllTransaccionesConDetalles().observe(this, transaccionesWithDetails -> {
+            if (transaccionesWithDetails != null) {
+                adapter.setTransaccionesConDetalles(transaccionesWithDetails);
             }
         });
+    }
+
+    private void loadCurrencies() {
+        executorService.execute(() -> {
+            listaMonedas = monedaDao.getAllMonedas().getValue(); // Simplified, proper way is observing LiveData
+            runOnUiThread(() -> {
+                if (listaMonedas != null) {
+                    List<String> monedaNames = new ArrayList<>();
+                    for (Moneda moneda : listaMonedas) {
+                        monedaNames.add(moneda.getNombre() + " - " + moneda.getCodigo());
+                    }
+                    ArrayAdapter<String> adapterMonedaOrigen = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, monedaNames);
+                    adapterMonedaOrigen.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerMonedaOrigen.setAdapter(adapterMonedaOrigen);
+
+                    ArrayAdapter<String> adapterMonedaDestino = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, monedaNames);
+                    adapterMonedaDestino.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerMonedaDestino.setAdapter(adapterMonedaDestino);
+                } else {
+                    Toast.makeText(this, "Error loading currencies", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+    }
+
+    private void convertCurrency() {
+        String montoString = etMonto.getText().toString();
+        if (montoString.isEmpty()) {
+            Toast.makeText(this, "Por favor, ingrese un monto", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double monto;
+        try {
+            monto = Double.parseDouble(montoString);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Monto inválido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int selectedOrigenPosition = spinnerMonedaOrigen.getSelectedItemPosition();
+        int selectedDestinoPosition = spinnerMonedaDestino.getSelectedItemPosition();
+
+        if (selectedOrigenPosition == Spinner.INVALID_POSITION || selectedDestinoPosition == Spinner.INVALID_POSITION || listaMonedas == null || listaMonedas.size() <= selectedOrigenPosition || listaMonedas.size() <= selectedDestinoPosition) {
+            Toast.makeText(this, "Seleccione monedas válidas", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Moneda monedaOrigen = listaMonedas.get(selectedOrigenPosition);
+        Moneda monedaDestino = listaMonedas.get(selectedDestinoPosition);
+
+        if (monedaOrigen.getMonedaID() == monedaDestino.getMonedaID()) {
+            Toast.makeText(this, "Seleccione monedas diferentes", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Calculate exchange rate and converted amount
+        double tasaCambio = monedaDestino.getValorReferencia() / monedaOrigen.getValorReferencia();
+        double montoConvertido = monto * tasaCambio;
+
+        // Get current timestamp
+        long timestamp = System.currentTimeMillis();
+
+        // Create and insert TransaccionMoneda
+        TransaccionMoneda transaccion = new TransaccionMoneda(
+                currentUserId,
+                monedaOrigen.getMonedaID(),
+                monedaDestino.getMonedaID(),
+                monto,
+                tasaCambio,
+                montoConvertido,
+                timestamp
+        );
+
+        transaccionMonedaViewModel.insert(transaccion);
+
+        Toast.makeText(this, "Conversión realizada", Toast.LENGTH_SHORT).show();
+
+        // Optionally update UI or clear fields
+        etMonto.setText("");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (executorService != null) {
+            executorService.shutdown();
+        }
     }
 }

@@ -1,21 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?android:attr/selectableItemBackground">
 
     <TextView
-        android:id="@+id/tvMontoOriginal"
-        android:layout_width="0dp"
+        android:id="@+id/tvUserInfo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Monto Original" />
+        android:textStyle="bold"
+        tools:text="User: John Doe" />
 
     <TextView
-        android:id="@+id/tvMontoConvertido"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvMonedaOrigen"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Monto Convertido" />
+        tools:text="From: USD - Dolar" />
+
+    <TextView
+        android:id="@+id/tvMonedaDestino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="To: BOB - Boliviano" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvMontoOriginal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="Monto: 100.00" />
+
+        <TextView
+            android:id="@+id/tvMontoConvertido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Convertido: 696.00" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textSize="12sp"
+        tools:text="Date: 2023-10-27 10:30"/>
 
 </LinearLayout>

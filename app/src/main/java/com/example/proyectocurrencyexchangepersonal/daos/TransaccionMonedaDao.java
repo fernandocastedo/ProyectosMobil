@@ -6,8 +6,10 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 import androidx.room.Delete;
+import androidx.room.Transaction;
 
 import com.example.proyectocurrencyexchangepersonal.models.TransaccionMoneda;
+import com.example.proyectocurrencyexchangepersonal.models.TransaccionConMonedasYUsuario;
 
 import java.util.List;
 
@@ -34,4 +36,8 @@ public interface TransaccionMonedaDao {
 
     @Query("SELECT COUNT(*) FROM transaccionmoneda")
     int countTransaccionesMoneda();
+
+    @Transaction
+    @Query("SELECT T.*, U.nombre as usuarioNombre, MO.nombre as monedaOrigenNombre, MO.codigo as monedaOrigenCodigo, MD.nombre as monedaDestinoNombre, MD.codigo as monedaDestinoCodigo FROM transaccionmoneda AS T INNER JOIN usuario AS U ON T.usuarioID = U.usuarioID INNER JOIN moneda AS MO ON T.monedaOrigenID = MO.monedaID INNER JOIN moneda AS MD ON T.monedaDestinoID = MD.monedaID ORDER BY T.fecha DESC")
+    LiveData<List<TransaccionConMonedasYUsuario>> getAllTransaccionesConDetalles();
 }

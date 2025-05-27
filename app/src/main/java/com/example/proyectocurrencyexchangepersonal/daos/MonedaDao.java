@@ -23,7 +23,7 @@ public interface MonedaDao {
     @Delete
     void delete(Moneda moneda);
 
-    @Query("SELECT * FROM moneda ORDER BY nombre ASC")
+    @Query("SELECT * FROM moneda")
     LiveData<List<Moneda>> getAllMonedas();
 
     @Query("SELECT * FROM moneda WHERE monedaID = :id LIMIT 1")

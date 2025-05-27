@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainMenuActivity extends AppCompatActivity {
 
     private Button btnConversiones, btnCrearMonedas, btnDatabaseInfo;
+    private int currentUserId = -1; // Initialize with a default value. Replace with actual user ID after login.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
         btnConversiones.setOnClickListener(v -> {
             Intent intent = new Intent(MainMenuActivity.this, ConversionesActivity.class);
+            int userIdToPass = (currentUserId == -1) ? 1 : currentUserId; // Pass dummy ID if not logged in
+            intent.putExtra("USER_ID", userIdToPass);
             startActivity(intent);
         });
 

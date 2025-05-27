@@ -13,7 +13,7 @@ import com.example.proyectocurrencyexchangepersonal.models.Usuario;
 import com.example.proyectocurrencyexchangepersonal.models.Moneda;
 import com.example.proyectocurrencyexchangepersonal.models.TransaccionMoneda;
 
-@Database(entities = {Usuario.class, Moneda.class, TransaccionMoneda.class}, version = 1, exportSchema = false)
+@Database(entities = {Usuario.class, Moneda.class, TransaccionMoneda.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
