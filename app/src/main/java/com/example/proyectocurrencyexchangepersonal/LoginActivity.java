@@ -1,5 +1,6 @@
 package com.example.proyectocurrencyexchangepersonal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,7 +19,7 @@ import com.example.proyectocurrencyexchangepersonal.viewmodels.UsuarioViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginActivity extends AppCompatActivity {
+public class    LoginActivity extends AppCompatActivity {
 
     private Spinner spinnerUsuarios;
     private EditText etContrasena;
@@ -72,7 +73,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (usuarioSeleccionado.getContrasena().equals(contrasenaIngresada)) {
                     Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                    // TODO: Navegar al menú principal
+                    Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
+                    startActivity(intent);
+                    finish();  // Para no volver al login con back
+
                 } else {
                     Toast.makeText(LoginActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
                 }

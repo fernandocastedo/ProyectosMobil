@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvNombreMoneda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la moneda" />
+
+    <TextView
+        android:id="@+id/tvCodigoMoneda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Código de la moneda" />
+
+    <TextView
+        android:id="@+id/tvPaisOrigen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="País de origen" />
+
+    <TextView
+        android:id="@+id/tvValorReferencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valor de referencia" />
+
+</LinearLayout>

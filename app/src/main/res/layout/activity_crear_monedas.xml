@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_monedas"
+    android:padding="30dp">
+
+    <!-- Titulo -->
+    <TextView
+        android:id="@+id/tvTituloCrearMonedas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CREAR MONEDAS"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <!-- EditText Nombre de la Moneda -->
+    <EditText
+        android:id="@+id/etNombreMoneda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTituloCrearMonedas"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Ingresar Nombre"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#DDDDDD"/>
+
+    <!-- EditText Código de la Moneda -->
+    <EditText
+        android:id="@+id/etCodigoMoneda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etNombreMoneda"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Ingresar Código"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#DDDDDD"/>
+
+    <!-- EditText País de Origen -->
+    <EditText
+        android:id="@+id/etPaisOrigen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCodigoMoneda"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Ingresar País de Origen"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#DDDDDD"/>
+
+    <!-- EditText Valor de Referencia -->
+    <EditText
+        android:id="@+id/etValorReferencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etPaisOrigen"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Ingresar Valor de Referencia"
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#DDDDDD"/>
+
+    <!-- Botón Crear -->
+    <Button
+        android:id="@+id/btnCrearMoneda"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/etValorReferencia"
+        android:layout_marginTop="25dp"
+        android:text="CREAR MONEDA"
+        android:backgroundTint="#000000"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"/>
+
+    <!-- Resultados -->
+    <TextView
+        android:id="@+id/tvResultadoCreacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resultado:"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/btnCrearMoneda"
+        android:layout_marginTop="20dp"/>
+
+    <!-- RecyclerView para mostrar las monedas creadas -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMonedas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tvResultadoCreacion"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_monedas"
+    android:padding="30dp">
+
+
+    <TextView
+        android:id="@+id/tvTituloConversiones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CONVERSIONES"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Spinner Moneda Origen -->
+    <Spinner
+        android:id="@+id/spinnerMonedaOrigen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTituloConversiones"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/spinner_background"
+        android:padding="10dp"/>
+
+    <!-- Spinner Moneda Destino -->
+    <Spinner
+        android:id="@+id/spinnerMonedaDestino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerMonedaOrigen"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/spinner_background"
+        android:padding="10dp"/>
+
+    <!-- EditText Monto -->
+    <EditText
+        android:id="@+id/etMonto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerMonedaDestino"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Ingresar Monto"
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#DDDDDD"/>
+
+    <!-- EditText Fecha -->
+    <EditText
+        android:id="@+id/etFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etMonto"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Ingresar Fecha"
+        android:inputType="date"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#DDDDDD"/>
+
+    <!-- Botón Convertir -->
+    <Button
+        android:id="@+id/btnConvertir"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/etFecha"
+        android:layout_marginTop="25dp"
+        android:text="CONVERTIR"
+        android:backgroundTint="#000000"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"/>
+
+    <!-- Resultados -->
+    <TextView
+        android:id="@+id/tvResultados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resultados:"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/btnConvertir"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Lista de resultados -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewResultados"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tvResultados"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

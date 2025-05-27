@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_monedas"
+    android:padding="30dp">
+
+    <ImageView
+        android:id="@+id/imgLogoMenu"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:src="@drawable/fercastedo_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
+    <Button
+        android:id="@+id/btnConversiones"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="CONVERSIONES"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:background="@drawable/btn_white_rounded"
+        android:layout_below="@id/imgLogoMenu"
+        android:layout_marginTop="60dp"/>
+
+    <Button
+        android:id="@+id/btnCrearMonedas"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="CREAR MONEDAS"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:background="@drawable/btn_white_rounded"
+        android:layout_below="@id/btnConversiones"
+        android:layout_marginTop="30dp" />
+
+</RelativeLayout>
